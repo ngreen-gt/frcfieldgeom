@@ -10,15 +10,15 @@ ZoneFun <- function(center=c(0,0), inner_radius=1,outer_radius=2, npoints=100, s
 }
 
 
-robotFun <- function(position=c(0,0),width=1,length=1,angle=0)
+robotFun <- function(position=c(0,0),width=1,length=1,angle=0,offset=0,pivot=FALSE)
 {
   rad<-angle*pi/180
-  pos1 <- data.frame(x=position[1],y=position[2])
-  pos2 <- data.frame(x=position[1]+length*cos(rad),y=position[2]+length*sin(rad))
-  pos3 <- data.frame(x=position[1]+length*cos(rad)+width*cos(rad-(pi/2)),
-                     y=position[2]+length*sin(rad)+width*sin(rad-(pi/2)))
-  pos4 <- data.frame(x=position[1]+width*cos(rad-(pi/2)),
-                     y=position[2]+width*sin(rad-(pi/2)))
+  pos1 <- data.frame(x=position[1]+offset*cos(rad)-pivot*((length/2)*cos(rad)+(width/2)*cos(rad-(pi/2))),y=position[2]+offset*sin(rad)-pivot*((length/2)*sin(rad)+(width/2)*sin(rad-(pi/2))))
+  pos2 <- data.frame(x=position[1]+length*cos(rad)+offset*cos(rad)-pivot*((length/2)*cos(rad)+(width/2)*cos(rad-(pi/2))),y=position[2]+length*sin(rad)+offset*sin(rad)-pivot*((length/2)*sin(rad)+(width/2)*sin(rad-(pi/2))))
+  pos3 <- data.frame(x=position[1]+length*cos(rad)+width*cos(rad-(pi/2))+offset*cos(rad)-pivot*((length/2)*cos(rad)+(width/2)*cos(rad-(pi/2))),
+                     y=position[2]+length*sin(rad)+width*sin(rad-(pi/2))+offset*sin(rad)-pivot*((length/2)*sin(rad)+(width/2)*sin(rad-(pi/2))))
+  pos4 <- data.frame(x=position[1]+width*cos(rad-(pi/2))+offset*cos(rad)-pivot*((length/2)*cos(rad)+(width/2)*cos(rad-(pi/2))),
+                     y=position[2]+width*sin(rad-(pi/2))+offset*sin(rad)-pivot*((length/2)*sin(rad)+(width/2)*sin(rad-(pi/2))))
   
   rbind(pos1,pos2,pos3,pos4)
 }

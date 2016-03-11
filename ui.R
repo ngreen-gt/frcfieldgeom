@@ -13,7 +13,9 @@ shinyUI(fluidPage(h1("FRC field app with scoring and robot positions"),
                       numericInput("rposy",label = "Position (y)",value=0),
                       numericInput("width",label = "Robot width (ft)",value=2),
                       numericInput("length",label = "Robot length (ft)",value=3),
-                      numericInput("rangle",label = "Robot angle (degrees)",value=90)
+                      numericInput("rangle",label = "Robot angle (degrees)",value=90),
+                      numericInput("roffset",label="Robot offset (ft)",value=0),
+                      checkboxInput("rpivot", label = "Pivot around center", value = FALSE)
                     )
                   ),
                   plotOutput("robotPlot", height="700px",width="800px")
